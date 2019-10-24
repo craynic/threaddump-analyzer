@@ -47,7 +47,10 @@ function analyzeFromQuery() { // eslint-disable-line no-unused-vars
             url = kv[1];
         }
     }
-    if (url == "") return;
+    if (url == "") {
+        listIndex();
+        return;
+    }
     fetch(url)
         .then(function (response) {
             response.text().then(function (text) {
@@ -56,6 +59,25 @@ function analyzeFromQuery() { // eslint-disable-line no-unused-vars
         });
 }
 
+function listIndex() { // eslint-disable-line no-unused-vars
+    fetch("stacks/index.txt").then(function (response) {
+        response.text().then(function (text) {
+            var fileList = text.split("\n");
+            renderFileList(fileList);
+        });
+    });
+}
+
+function renderFileList(fileList) {
+    var html = "";
+    for (var i = 0; i < fileList.length; i++) {
+        var filename = fileList[i];
+        if (filename == "") continue;
+        html += '<li><a href="?url=stacks/' + filename + '">' + filename + "</a></li>";
+    }
+    var ul = document.getElementById("FILELIST");
+    ul.innerHTML = html;
+}
 
 function analyze(text) {
     var analyzer = new Analyzer(text);
