@@ -329,8 +329,11 @@ function Thread(line) {
 
         headerHTML += '"';
         headerHTML += htmlEscape(this.name);
+        headerHTML += '"';
 
-        headerHTML += '": ';
+        headerHTML += '[' + parseInt(this.nid, 16).toString() + ']';
+
+        headerHTML += ': ';
         headerHTML += this.getStatus().toHtml();
 
         headerHTML += "</span>";
