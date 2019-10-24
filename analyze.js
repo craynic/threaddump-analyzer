@@ -51,6 +51,9 @@ function analyzeFromQuery() { // eslint-disable-line no-unused-vars
         listIndex();
         return;
     }
+    var sourceLink = document.getElementById("SOURCELINK");
+    sourceLink.href = url;
+    sourceLink.style.display = "block";
     fetch(url)
         .then(function (response) {
             response.text().then(function (text) {
